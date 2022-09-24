@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-//    companion object {
-//        private const val CAMERA_PERMISSION_CODE = 1
-//        private const val CAMERA_REQUEST_CODE = 2
-//    }
-
     // Create launcher for camera
     private val cameraLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -51,30 +46,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.buttonCamera.setOnClickListener {
-
-//            if (ContextCompat.checkSelfPermission(
-//                    this, Manifest.permission.CAMERA
-//                ) == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                startActivityForResult(intent, CAMERA_REQUEST_CODE)
-//            } else {
-//                ActivityCompat.requestPermissions(
-//                    this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE
-//                )
-//            }
-
             requestCameraPermission()
-
         }
 
     }
+
 
     private fun requestCameraPermission() {
         // If user denied permission earlier, show rationale dialog
@@ -112,36 +95,6 @@ class MainActivity : AppCompatActivity() {
 //        super.onDestroy()
 //        if (binding != null) {
 //            binding = null
-//        }
-//    }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == CAMERA_PERMISSION_CODE) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                startActivityForResult(intent, CAMERA_REQUEST_CODE)
-//            } else {
-//                Toast.makeText(
-//                    this,
-//                    "Permission denied for camera. You can grant it by going to system settings.",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK) {
-//            if (requestCode == CAMERA_REQUEST_CODE) {
-//                val cameraPicture: Bitmap = data?.extras?.get("data") as Bitmap
-//                binding.imageBox.setImageBitmap(cameraPicture)
-//            }
 //        }
 //    }
 
