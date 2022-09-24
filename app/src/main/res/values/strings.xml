@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Camera Demo</string>
+    <string name="paragraph">Hello World! This is a demo for image capturing and selection using CAMERA</string>
+    <string name="button_camera">camera</string>
 </resources>
