@@ -53,6 +53,16 @@ class MainActivity : AppCompatActivity() {
         binding.buttonCamera.setOnClickListener {
             checkForPermissionAndLaunchCamera()
         }
+        binding.buttonAppInfo.setOnClickListener{
+            try {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+            }
+        }
 
     }
 
@@ -95,9 +105,5 @@ class MainActivity : AppCompatActivity() {
 //            binding = null
 //        }
 //    }
-
-    fun test(){
-
-    }
 
 }
