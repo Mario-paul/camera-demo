@@ -1,10 +1,8 @@
 package com.example.camerademo
 
 import android.Manifest
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +14,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.example.camerademo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Create ActivityResultLauncher for granting permission
-    private val requestPermission: ActivityResultLauncher<String> =
+    private val requestPermissionAndLaunchCamera: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 // If permission granted, go to camera with an intent
@@ -42,7 +39,8 @@ class MainActivity : AppCompatActivity() {
                 cameraLauncher.launch(intent)
             } else {
                 // If permission is denied, show text
-                Toast.makeText(this, "Permission denied by user.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error: permission for camera denied by user", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -53,22 +51,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonCamera.setOnClickListener {
-            requestCameraPermission()
+            checkForPermissionAndLaunchCamera()
         }
 
     }
 
 
-    private fun requestCameraPermission() {
+    private fun checkForPermissionAndLaunchCamera() {
         // If user denied permission earlier, show rationale dialog
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             showRationaleDialog(
-                "Camera Demo",
+                "Permissions error",
                 "You need to allow access to camera to use this feature."
             )
         } else {
             // If user hasn't responded yet, request permission for camera
-            requestPermission.launch(Manifest.permission.CAMERA)
+            requestPermissionAndLaunchCamera.launch(Manifest.permission.CAMERA)
         }
     }
 
@@ -97,5 +95,9 @@ class MainActivity : AppCompatActivity() {
 //            binding = null
 //        }
 //    }
+
+    fun test(){
+
+    }
 
 }
